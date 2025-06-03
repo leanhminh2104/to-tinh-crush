@@ -1,0 +1,331 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hướng Dẫn Sử Dụng _ LAMDev</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 2rem 1rem;
+        background: #f9f9f9;
+        color: #333;
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        max-width: 700px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgb(0 0 0 / 0.1);
+        padding: 1.5rem 2rem 2.5rem;
+        text-align: center;
+      }
+      .container img {
+        max-width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        margin-bottom: 1.8rem;
+      }
+      h2 {
+        color: #ff6b9d;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        font-size: 32px;;
+      }
+      .guide-step {
+        text-align: left;
+        margin-bottom: 1rem;
+        padding-left: 40px; 
+        position: relative;
+        min-height: 30px;
+      }
+      .guide-step::before {
+        content: attr(data-step);
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #ff6b9d;
+        color: white;
+        font-weight: 700;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        border-radius: 50%;
+        user-select: none;
+      }
+      .guide-step p {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #444;
+      }
+      
+      .back-btn {
+        display: inline-block;
+        margin-top: 1.5rem;
+        padding: 0.5rem 1.2rem;
+        background-color: #ff6b9d;
+        color: white;
+        border: none;
+        border-radius: 24px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+        user-select: none;
+      }
+      .back-btn:hover {
+        background-color: #e85c86;
+      }
+      @media (max-width: 480px) {
+        .container {
+          padding: 1rem 1.2rem 2rem;
+        }
+        .guide-step p {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  <style>.--savior-overlay-transform-reset {
+    transform: none !important;
+  }
+  .--savior-overlay-z-index-top {
+    z-index: 2147483643 !important;
+  }
+  .--savior-overlay-position-relative {
+    position: relative;
+  }
+  .--savior-overlay-position-static {
+    position: static !important;
+  }
+  .--savior-overlay-overflow-hidden {
+    overflow: hidden !important;
+  }
+  .--savior-overlay-overflow-x-visible {
+    overflow-x: visible !important;
+  }
+  .--savior-overlay-overflow-y-visible {
+    overflow-y: visible !important;
+  }
+  .--savior-overlay-z-index-reset {
+    z-index: auto !important;
+  }
+  .--savior-overlay-display-none {
+    display: none !important;
+  }
+  .--savior-overlay-clearfix {
+    clear: both;
+  }
+  .--savior-overlay-reset-filter {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+  .--savior-tooltip-host {
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+  }
+  /*Override css styles for Twitch.tv*/
+  main.--savior-overlay-z-index-reset {
+    z-index: auto !important;
+  }
+  .modal__backdrop.--savior-overlay-z-index-reset {
+    position: static !important;
+  }
+  main.--savior-overlay-z-index-top {
+    z-index: auto !important;
+  }
+  main.--savior-overlay-z-index-top .channel-root__player-container + div,
+  main.--savior-overlay-z-index-top .video-player-hosting-ui__container + div {
+    opacity: 0.1;
+  }
+  /*Dirty hack for facebook big video page e.g: https://www.facebook.com/abc/videos/...*/
+  .--savior-backdrop {
+    position: fixed !important;
+    z-index: 2147483642 !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw !important;
+    background-color: rgba(0,0,0,0.9);
+  }
+  .--savior-overlay-twitter-video-player {
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+  }
+  .--savior-overlay-z-index-reset [class*="DivSideNavContainer"],
+  .--savior-overlay-z-index-reset [class*="DivHeaderContainer"],
+  .--savior-overlay-z-index-reset [class*="DivBottomContainer"],
+  .--savior-overlay-z-index-reset [class*="DivCategoryListWrapper"],
+  .--savior-overlay-z-index-reset [data-testid="sidebarColumn"],
+  .--savior-overlay-z-index-reset header[role="banner"],
+  .--savior-overlay-z-index-reset [data-testid="cellInnerDiv"]:not(.--savior-overlay-z-index-reset),
+  .--savior-overlay-z-index-reset [aria-label="Home timeline"]>div:first-child,
+  .--savior-overlay-z-index-reset [aria-label="Home timeline"]>div:nth-child(3) {
+    z-index: -1 !important;
+  }
+  .--savior-overlay-z-index-reset [data-testid="cellInnerDiv"] .--savior-backdrop+div {
+    z-index: 2147483643 !important;
+  }
+  .--savior-overlay-z-index-reset [data-testid="primaryColumn"]>[aria-label="Home timeline"] {
+    z-index: 0 !important;
+  }
+  .--savior-overlay-z-index-reset#mtLayer,
+  .--savior-overlay-z-index-reset.media-layer {
+    z-index: 3000 !important;
+  }
+  .--savior-overlay-position-relative [class*="SecBar_secBar_"],
+  .--savior-overlay-position-relative .woo-box-flex [class*="Frame_top_"] {
+    z-index: 0 !important;
+  }
+  .--savior-overlay-position-relative .vue-recycle-scroller__item-view:not(.--savior-overlay-z-index-reset),
+  .--savior-overlay-position-relative .woo-panel-main[class*="BackTop_main_"],
+  .--savior-overlay-position-relative [class*="Main_side_"] {
+    z-index: -1 !important;
+  }
+  /* Fix conflict css with zingmp3 */
+  .zm-video-modal.--savior-overlay-z-index-reset {
+    position: absolute;
+  }
+  /* Dirty hack for xvideos99 */
+  #page #main.--savior-overlay-z-index-reset {
+    z-index: auto !important;
+  }
+  /* Overlay for ok.ru */
+  #vp_w.--savior-overlay-z-index-reset.media-layer.media-layer__video {
+    overflow-y: hidden;
+    z-index: 2147483643 !important;
+  }
+  /* Fix missing controller for tv.naver.com */
+  .--savior-overlay-z-index-top.rmc_controller,
+  .--savior-overlay-z-index-top.rmc_setting_intro,
+  .--savior-overlay-z-index-top.rmc_highlight,
+  .--savior-overlay-z-index-top.rmc_control_settings {
+    z-index: 2147483644 !important;
+  }
+  /* Dirty hack for douyi.com */
+  .swiper-wrapper.--savior-overlay-z-index-reset .swiper-slide:not(.swiper-slide-active),
+  .swiper-wrapper.--savior-overlay-transform-reset .swiper-slide:not(.swiper-slide-active) {
+    display: none;
+  }
+  .videoWrap + div > div {
+    pointer-events: unset;
+  }
+  /* Dirty hack for fpt.ai */
+  .mfp-wrap.--savior-overlay-z-index-top {
+    position: relative;
+  }
+  .mfp-wrap.--savior-overlay-z-index-top .mfp-close {
+    display: none;
+  }
+  .mfp-wrap.--savior-overlay-z-index-top .mfp-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  section.--savior-overlay-z-index-reset>main[role="main"].--savior-overlay-z-index-reset + nav {
+    z-index: -1 !important;
+  }
+  section.--savior-overlay-z-index-reset>main[role="main"].--savior-overlay-z-index-reset section.--savior-overlay-z-index-reset div.--savior-overlay-z-index-reset ~ div {
+    position: relative;
+  }
+  .watching-movie #video-player.--savior-overlay-z-index-top {
+    z-index: 2147483644 !important;
+  }
+  div[class^="tiktok"].--savior-overlay-z-index-reset {
+    z-index: 2147483644 !important;
+  }
+  .--savior-lightoff-fix section:not(:has([class*="--savior-overlay-"])),
+  .--savior-lightoff-fix section.section_video ~ section {
+    z-index: -1;
+    position: relative;
+  }
+  .--savior-lightoff-fix header,
+  .--savior-lightoff-fix footer,
+  .--savior-lightoff-fix .top-header,
+  .--savior-lightoff-fix .swiper-container,
+  .--savior-lightoff-fix #to_top,
+  .--savior-lightoff-fix #button-adblock {
+    z-index: -1 !important;
+  }
+  @-moz-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @-o-keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  </style></head>
+  <body>
+    <div class="container">
+          <h2>Hướng Dẫn Sử Dụng</h2>
+          <p>Sau đây là các bước tạo link lời nhắn.</p>
+      <p>Bản update thêm hình ảnh bằng cách nhập link ảnh.</p>
+      <div class="guide-step" data-step="1">
+        <p>Nhấp vào nút "Tạo lời nhắn" để bắt đầu tùy chỉnh tin nhắn yêu thương.</p>
+      </div>
+      <img src="https://sv1.anhsieuviet.com/2025/06/03/1.png" alt="Hướng dẫn sử dụng">
+  
+      <div class="guide-step" data-step="2">
+        <p>Nhập những lời yêu thương muốn gửi đến người ấy ví dụ:</p>
+      
+        <p>Yêu em! </p>
+        <p>Anh yêu em </p>
+        <p>Cảm ơn em đã là ánh nắng của anh</p>
+      </div>
+      <img src="https://sv1.anhsieuviet.com/2025/06/03/2.png" alt="Hướng dẫn sử dụng">
+      <div class="guide-step" data-step="3">
+        <p>Thêm đuôi link để tránh bị trùng với những người khác (không bắt buộc)</p>
+      </div>
+      <div class="guide-step" data-step="4">
+        <p>Chọn màu sắc bạn thích để làm nổi bật thông điệp của mình.</p>
+      </div>
+      <div class="guide-step" data-step="5">
+        <p>Thêm bài hát yêu thích để tạo không khí đặc biệt cho món quà.</p>
+      </div>
+      <div class="guide-step" data-step="6">
+        <p>Nhấn nút tạo link hoặc tạo QR để lưu lại link hoặc ảnh QR đã tạo</p>
+      </div>
+          <div class="guide-step" data-step="7">
+        <p>Chia sẻ ngay để lan tỏa yêu thương đến bạn bè và gia đình.</p>
+      </div>
+      <div class="guide-step" data-step="8">
+        <p>Bạn có thể ủng hộ tôi bằng cách ấn vào ô ở góc phải bên dưới.</p>
+      </div>
+      <img src="https://sv1.anhsieuviet.com/2025/06/03/3.png" alt="Hướng dẫn sử dụng">
+      <a href="index.html" class="back-btn">← Quay Lại</a>
+    </div>
+  
+  
+  </body><savior-host style="all: unset; position: absolute; top: 0; left: 0; z-index: 99999999999999; display: block !important; overflow: unset"></savior-host><en2vi-host class="corom-element" version="3" style="all: initial; position: absolute; top: 0; left: 0; right: 0; height: 0; margin: 0; text-align: left; z-index: 10000000000; pointer-events: none; border: none; display: block"></en2vi-host><savior-host style="all: unset; position: absolute; top: 0; left: 0; z-index: 99999999999999; display: block !important; overflow: unset"></savior-host></html>
