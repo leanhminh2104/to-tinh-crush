@@ -1,7 +1,8 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Wedsite tạo wed gửi lời thương - LAMDev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Gửi lời yêu thương</title>
     <style>
       body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -219,6 +220,70 @@
           font-size: 0.85rem;
         }
       }
+      #AMIDev-top-menu {
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        z-index: 100000;
+    }
+
+    #AMIDev-top-menu li {
+        display: block;
+    }
+
+    .AMIDev-menu-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background-color: #e8dede6c;
+        color: #005eff;
+        text-decoration: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.432);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .AMIDev-menu-item img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .AMIDev-menu-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .AMIDev-menu-item i {
+        font-size: 14px;
+    }
+
+    .AMIDev-hidden {
+        display: none !important;
+    }
+
+    /* CSS cho hiệu ứng chuyển hướng */
+    #redirect-message {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 16px;
+        z-index: 999999;
+    }
     </style>
   <style>.--savior-overlay-transform-reset {
     transform: none !important;
@@ -420,6 +485,41 @@
   }
   </style></head>
   <body>
+    <ul id="AMIDev-top-menu">
+      <!-- Nút đóng menu -->
+      <li>
+          <a class="AMIDev-menu-item" id="AMIDev-toggle-menu-button" href="#">
+              <i class="fa-solid fa-eye-slash"></i>
+          </a>
+      </li>
+      <!-- Hỗ trợ Zalo -->
+      <li>
+          <a class="AMIDev-menu-item" href="#" onclick="openLink('https://zalo.me/g/boiqoq426')">
+              <img alt="Zalo" src="https://vncloud.net/assets/images/thumb-zalo.png">
+          </a>
+      </li>
+      <!-- Hỗ trợ Telegram -->
+      <li>
+          <a class="AMIDev-menu-item" href="#" onclick="openLink('https://t.me/aminteam_chat')">
+              <img alt="Telegram" src="https://cdn.mypanel.link/sw177w/7ea6iam2aygm0qws.gif">
+          </a>
+      </li>
+      <!-- Hỗ trợ Facebook -->
+      <li>
+          <a class="AMIDev-menu-item" href="#" onclick="openLink('https://www.facebook.com/share/g/19ya9W2SeC/')">
+              <img alt="Facebook" src="https://cdn.mypanel.link/4cgr8h/9rjnzbd98rt8s5we.gif">
+          </a>
+      </li>
+      <!-- Thông tin Admin -->
+      <li>
+          <a class="AMIDev-menu-item" href="#" onclick="openLink('https://support.leanhminh.io.vn')">
+              <img alt="ProFile" src="https://files.catbox.moe/t5tyui.gif">
+          </a>
+      </li>
+  </ul>
+
+  <!-- Hiển thị thông báo chuyển hướng -->
+  <div id="redirect-message">Đang chuyển hướng... Vui lòng chờ!</div>
     <div class="container">
         <h1>Một Chút Yêu Thương</h1>
         <p class="subtitle">
@@ -427,7 +527,7 @@
         </p>
         
         <div class="buttons">
-            <a href="./setup.html" class="btn btn-primary">
+            <a href="./loinhan.html" class="btn btn-primary">
                 Tạo lời nhắn
             </a>
            <a href="./huongdan.html" class="btn btn-secondary">
@@ -478,8 +578,18 @@
         <p>Chào bạn cảm ơn bạn đã truy cập và ủng hộ mình 💌</p>
       </div>
     </div>
-  
+    
     <script>
+      function openLink(url) {
+        // Hiển thị thông báo
+        document.getElementById("redirect-message").style.display = "block";
+
+        // Mở link trong tab mới sau 1 giây để tránh bị chặn
+        setTimeout(() => {
+            window.open(url, '_blank');
+            document.getElementById("redirect-message").style.display = "none";
+        }, 1000);
+    }
       const donateBtn = document.getElementById('donateBtn');
       const donateDialog = document.getElementById('donateDialog');
       const closeDonateDialog = document.getElementById('closeDonateDialog');
