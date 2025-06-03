@@ -1,0 +1,481 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Setup Wed - LAMDev</title>
+    <style> </style>
+<style> @font-face {
+            font-family: 'woff';
+            src: url('./DF.ttf') format('truetype');
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #000011 0%, #000000 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+
+        #inputSection {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 600px;
+            width: 90vw;
+            max-height: 100vh;
+            padding: 5px;
+            color: white;
+            box-sizing: border-box;
+            border-radius: 10px;
+            text-align: center;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #inputSection::-webkit-scrollbar {
+            display: none;
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            resize: vertical;
+            margin: 10px auto 0;
+        }
+
+        input[type=text] {
+            width: 100%;
+            max-width: 600px;
+            font-size: 16px;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 10px;
+        }
+
+        #textColor {
+            width: 100%;
+            max-width: 600px;
+            height: 40px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        #music-selector {
+            width: 100%;
+            max-width: 600px;
+            height: 40px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        button {
+            position: relative;
+            background: linear-gradient(145deg, #063d80, #4a90e2);
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 6px 0 #3a70b1, 0 10px 15px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 12px 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            outline: none;
+        }
+
+        button:hover {
+            box-shadow: 0 8px 0 #2e65a8, 0 14px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-4px);
+        }
+
+        button:active {
+            box-shadow: 0 3px 0 #3a70b1, 0 6px 10px rgba(0, 0, 0, 0.25);
+            transform: translateY(2px);
+        }
+
+
+        #linkContainer {
+            margin-top: 15px;
+            color: #74c0ff9d;
+            word-break: break-all;
+            user-select: text;
+            cursor: pointer;
+        }
+
+        #qrContainer {
+            margin-top: 10px;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        #galaxy {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform-style: preserve-3d;
+            transform-origin: center center;
+            transform: translate(-50%, -50%) scale(1);
+            width: 100vw;
+            height: 100vh;
+            overflow: visible;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #rotatingContainer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform-style: preserve-3d;
+            transform-origin: center center;
+            transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(1);
+            pointer-events: none;
+            z-index: 2;
+            width: 100vw;
+            height: 100vh;
+            overflow: visible;
+        }
+
+        .text-particle {
+            position: absolute;
+            white-space: nowrap;
+            font-family: 'woff';
+            text-shadow:
+                0 0 12px rgba(255, 255, 255, 0.8);
+            will-change: transform, opacity;
+            user-select: none;
+        }
+
+        .heart {
+            color: #ff7487ee;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            box-shadow: 0 0 4px white;
+            pointer-events: none;
+        }
+
+        #iconSelector {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .icon {
+            margin-top: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.3s ease;
+            user-select: none;
+            padding: 6px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        }
+
+        .icon:hover {
+            transform: scale(1.4);
+            color: #ff7487;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 12px #ff7487aa;
+        }
+
+        #selectedIconsDisplay {
+            color: #a0c4ff;
+            text-align: center;
+            min-height: 24px;
+            user-select: none;
+            margin-bottom: 18px;
+        }
+
+        #music-selector {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            gap: 12px;
+            margin: 20px 0 30px 0;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .image-particle {
+            position: absolute;
+            pointer-events: none;
+            will-change: transform, opacity;
+            user-select: none;
+            max-width: 50px;
+            max-height: 50px;
+            border-radius: 5px;
+            filter: drop-shadow(0 0 4px #fff);
+        }</style><style>.--savior-overlay-transform-reset {
+  transform: none !important;
+}
+.--savior-overlay-z-index-top {
+  z-index: 2147483643 !important;
+}
+.--savior-overlay-position-relative {
+  position: relative;
+}
+.--savior-overlay-position-static {
+  position: static !important;
+}
+.--savior-overlay-overflow-hidden {
+  overflow: hidden !important;
+}
+.--savior-overlay-overflow-x-visible {
+  overflow-x: visible !important;
+}
+.--savior-overlay-overflow-y-visible {
+  overflow-y: visible !important;
+}
+.--savior-overlay-z-index-reset {
+  z-index: auto !important;
+}
+.--savior-overlay-display-none {
+  display: none !important;
+}
+.--savior-overlay-clearfix {
+  clear: both;
+}
+.--savior-overlay-reset-filter {
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+.--savior-tooltip-host {
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+}
+/*Override css styles for Twitch.tv*/
+main.--savior-overlay-z-index-reset {
+  z-index: auto !important;
+}
+.modal__backdrop.--savior-overlay-z-index-reset {
+  position: static !important;
+}
+main.--savior-overlay-z-index-top {
+  z-index: auto !important;
+}
+main.--savior-overlay-z-index-top .channel-root__player-container + div,
+main.--savior-overlay-z-index-top .video-player-hosting-ui__container + div {
+  opacity: 0.1;
+}
+/*Dirty hack for facebook big video page e.g: https://www.facebook.com/abc/videos/...*/
+.--savior-backdrop {
+  position: fixed !important;
+  z-index: 2147483642 !important;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw !important;
+  background-color: rgba(0,0,0,0.9);
+}
+.--savior-overlay-twitter-video-player {
+  position: fixed;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+}
+.--savior-overlay-z-index-reset [class*="DivSideNavContainer"],
+.--savior-overlay-z-index-reset [class*="DivHeaderContainer"],
+.--savior-overlay-z-index-reset [class*="DivBottomContainer"],
+.--savior-overlay-z-index-reset [class*="DivCategoryListWrapper"],
+.--savior-overlay-z-index-reset [data-testid="sidebarColumn"],
+.--savior-overlay-z-index-reset header[role="banner"],
+.--savior-overlay-z-index-reset [data-testid="cellInnerDiv"]:not(.--savior-overlay-z-index-reset),
+.--savior-overlay-z-index-reset [aria-label="Home timeline"]>div:first-child,
+.--savior-overlay-z-index-reset [aria-label="Home timeline"]>div:nth-child(3) {
+  z-index: -1 !important;
+}
+.--savior-overlay-z-index-reset [data-testid="cellInnerDiv"] .--savior-backdrop+div {
+  z-index: 2147483643 !important;
+}
+.--savior-overlay-z-index-reset [data-testid="primaryColumn"]>[aria-label="Home timeline"] {
+  z-index: 0 !important;
+}
+.--savior-overlay-z-index-reset#mtLayer,
+.--savior-overlay-z-index-reset.media-layer {
+  z-index: 3000 !important;
+}
+.--savior-overlay-position-relative [class*="SecBar_secBar_"],
+.--savior-overlay-position-relative .woo-box-flex [class*="Frame_top_"] {
+  z-index: 0 !important;
+}
+.--savior-overlay-position-relative .vue-recycle-scroller__item-view:not(.--savior-overlay-z-index-reset),
+.--savior-overlay-position-relative .woo-panel-main[class*="BackTop_main_"],
+.--savior-overlay-position-relative [class*="Main_side_"] {
+  z-index: -1 !important;
+}
+/* Fix conflict css with zingmp3 */
+.zm-video-modal.--savior-overlay-z-index-reset {
+  position: absolute;
+}
+/* Dirty hack for xvideos99 */
+#page #main.--savior-overlay-z-index-reset {
+  z-index: auto !important;
+}
+/* Overlay for ok.ru */
+#vp_w.--savior-overlay-z-index-reset.media-layer.media-layer__video {
+  overflow-y: hidden;
+  z-index: 2147483643 !important;
+}
+/* Fix missing controller for tv.naver.com */
+.--savior-overlay-z-index-top.rmc_controller,
+.--savior-overlay-z-index-top.rmc_setting_intro,
+.--savior-overlay-z-index-top.rmc_highlight,
+.--savior-overlay-z-index-top.rmc_control_settings {
+  z-index: 2147483644 !important;
+}
+/* Dirty hack for douyi.com */
+.swiper-wrapper.--savior-overlay-z-index-reset .swiper-slide:not(.swiper-slide-active),
+.swiper-wrapper.--savior-overlay-transform-reset .swiper-slide:not(.swiper-slide-active) {
+  display: none;
+}
+.videoWrap + div > div {
+  pointer-events: unset;
+}
+/* Dirty hack for fpt.ai */
+.mfp-wrap.--savior-overlay-z-index-top {
+  position: relative;
+}
+.mfp-wrap.--savior-overlay-z-index-top .mfp-close {
+  display: none;
+}
+.mfp-wrap.--savior-overlay-z-index-top .mfp-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+section.--savior-overlay-z-index-reset>main[role="main"].--savior-overlay-z-index-reset + nav {
+  z-index: -1 !important;
+}
+section.--savior-overlay-z-index-reset>main[role="main"].--savior-overlay-z-index-reset section.--savior-overlay-z-index-reset div.--savior-overlay-z-index-reset ~ div {
+  position: relative;
+}
+.watching-movie #video-player.--savior-overlay-z-index-top {
+  z-index: 2147483644 !important;
+}
+div[class^="tiktok"].--savior-overlay-z-index-reset {
+  z-index: 2147483644 !important;
+}
+.--savior-lightoff-fix section:not(:has([class*="--savior-overlay-"])),
+.--savior-lightoff-fix section.section_video ~ section {
+  z-index: -1;
+  position: relative;
+}
+.--savior-lightoff-fix header,
+.--savior-lightoff-fix footer,
+.--savior-lightoff-fix .top-header,
+.--savior-lightoff-fix .swiper-container,
+.--savior-lightoff-fix #to_top,
+.--savior-lightoff-fix #button-adblock {
+  z-index: -1 !important;
+}
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style></head>
+
+<body>
+
+    <div id="inputSection" style="display: block;">
+        <h2>Nhập lời nhắn</h2>
+        <textarea id="inputText" rows="6" placeholder="Nhập mỗi dòng một câu..."></textarea><br>
+        <input type="text" id="customId" placeholder="Nhập đuôi link tùy chọn (không bắt buộc)"><br>
+        <input type="text" id="imageURL" placeholder="Nhập link ảnh để hiển thị (URL ảnh)"><br>
+        <input type="color" id="textColor" value="#ff7487" title="Chọn màu chữ">
+
+        <div id="iconSelector">
+            <span class="icon" data-icon="♥" style="opacity: 0.5;">♥</span>
+            <span class="icon" data-icon="❤️" style="opacity: 0.5;">❤️</span>
+            <span class="icon" data-icon="💕" style="opacity: 0.5;">💕</span>
+            <span class="icon" data-icon="🎉" style="opacity: 0.5;">🎉</span>
+            <span class="icon" data-icon="🎂" style="opacity: 0.5;">🎂</span>
+            <span class="icon" data-icon="🌟" style="opacity: 0.5;">🌟</span>
+        </div>
+        <div id="selectedIconsDisplay">Chọn Icon</div>
+
+        <div id="music-selector">
+            <label for="music">Chọn bài nhạc yêu thích: </label>
+            <select id="music">
+                <option value="">-- Chọn bài --</option>
+                <option value="https://panbap.github.io/Guiloiyeuthuong/music/e.mp3">LỄ ĐƯỜNG</option>
+                <option value="https://panbap.github.io/Guiloiyeuthuong/music/d.mp3">Kỵ sĩ và ánh sao</option>
+                <option value="https://panbap.github.io/Guiloiyeuthuong/music/c.mp3">Dù cho tận thế</option>
+                <option value="https://panbap.github.io/Guiloiyeuthuong/music/s.mp3">Có chắc yêu là đây</option>
+            </select>
+            <div id="music-link" style="margin-top:8px;"></div>
+        </div>
+
+        <button id="startBtn">Tạo link</button>
+        <button id="qrBtn">Tạo QR</button>
+        <div id="linkContainer" style="display:none;"></div>
+        <div id="qrContainer" style="display:none;"></div>
+    </div>
+
+    <div id="galaxy" style="display: none;"></div>
+    <div id="rotatingContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+    <script>
+        const _0x5ebe77=_0x219a;(function(_0x2d53ae,_0x60613b){const _0xe1cbfd=_0x219a,_0x44359=_0x2d53ae();while(!![]){try{const _0x2af1df=parseInt(_0xe1cbfd(0x1a2))/0x1*(parseInt(_0xe1cbfd(0x13d))/0x2)+-parseInt(_0xe1cbfd(0x180))/0x3+parseInt(_0xe1cbfd(0x173))/0x4*(-parseInt(_0xe1cbfd(0x176))/0x5)+parseInt(_0xe1cbfd(0x12e))/0x6*(parseInt(_0xe1cbfd(0x190))/0x7)+-parseInt(_0xe1cbfd(0x15a))/0x8*(-parseInt(_0xe1cbfd(0x16c))/0x9)+parseInt(_0xe1cbfd(0x129))/0xa+-parseInt(_0xe1cbfd(0x125))/0xb;if(_0x2af1df===_0x60613b)break;else _0x44359['push'](_0x44359['shift']());}catch(_0x5c33fc){_0x44359['push'](_0x44359['shift']());}}}(_0x4ae8,0x1ab70));const style=document[_0x5ebe77(0x135)](_0x5ebe77(0x187));style[_0x5ebe77(0x156)]=_0x5ebe77(0x152),document[_0x5ebe77(0x18e)][_0x5ebe77(0x133)](style);const galaxy=document[_0x5ebe77(0x166)](_0x5ebe77(0x1a6)),rotatingContainer=document[_0x5ebe77(0x166)](_0x5ebe77(0x174)),inputSection=document['getElementById']('inputSection'),startBtn=document[_0x5ebe77(0x166)](_0x5ebe77(0x122)),textarea=document[_0x5ebe77(0x166)](_0x5ebe77(0x1a3)),linkContainer=document[_0x5ebe77(0x166)](_0x5ebe77(0x170)),qrBtn=document[_0x5ebe77(0x166)]('qrBtn'),customIdInput=document[_0x5ebe77(0x166)](_0x5ebe77(0x197)),colorInput=document[_0x5ebe77(0x166)]('textColor'),qrContainer=document[_0x5ebe77(0x166)]('qrContainer'),musicSelect=document[_0x5ebe77(0x166)](_0x5ebe77(0x139)),iconSelector=document[_0x5ebe77(0x166)](_0x5ebe77(0x12b)),selectedIconsDisplay=document[_0x5ebe77(0x166)](_0x5ebe77(0x182));let selectedIcons=new Set();iconSelector[_0x5ebe77(0x1a7)](_0x5ebe77(0x163))['forEach'](_0x2b60fe=>{const _0x2bb540=_0x5ebe77;_0x2b60fe[_0x2bb540(0x187)][_0x2bb540(0x169)]=0.5;}),iconSelector[_0x5ebe77(0x154)](_0x5ebe77(0x15b),_0x259861=>{const _0x2b3c9b=_0x5ebe77;if(_0x259861[_0x2b3c9b(0x186)][_0x2b3c9b(0x14c)]['contains'](_0x2b3c9b(0x168))){const _0xef5414=_0x259861[_0x2b3c9b(0x186)]['dataset'][_0x2b3c9b(0x168)];selectedIcons[_0x2b3c9b(0x16f)](_0xef5414)?(selectedIcons['delete'](_0xef5414),_0x259861[_0x2b3c9b(0x186)][_0x2b3c9b(0x187)][_0x2b3c9b(0x169)]=0.5):(selectedIcons['add'](_0xef5414),_0x259861[_0x2b3c9b(0x186)][_0x2b3c9b(0x187)][_0x2b3c9b(0x169)]=0x1),updateSelectedIconsDisplay();}});function updateSelectedIconsDisplay(){const _0xecd8e9=_0x5ebe77;selectedIconsDisplay[_0xecd8e9(0x188)]=[...selectedIcons]['join']('\x20');}let messages=[],textColorFromURL=_0x5ebe77(0x161);function truncateText(_0x13ecf0,_0xe91869){const _0x13217b=_0x5ebe77;return _0x13ecf0[_0x13217b(0x17d)]>_0xe91869?_0x13ecf0[_0x13217b(0x1a8)](0x0,_0xe91869)+_0x13217b(0x12c):_0x13ecf0;}function _0x219a(_0x5bffbc,_0x422604){const _0x4ae8a3=_0x4ae8();return _0x219a=function(_0x219a02,_0x55829c){_0x219a02=_0x219a02-0x11b;let _0x481e37=_0x4ae8a3[_0x219a02];return _0x481e37;},_0x219a(_0x5bffbc,_0x422604);}function getMessagesFromURL(){const _0x17f8fb=_0x5ebe77,_0x193a68=new URLSearchParams(window['location'][_0x17f8fb(0x192)]),_0x5d2601=_0x193a68['get'](_0x17f8fb(0x181));if(!_0x5d2601)return null;try{const _0x2db264=decodeURIComponent(_0x5d2601),_0x1b83b7=_0x2db264[_0x17f8fb(0x17c)]('|');if(Array[_0x17f8fb(0x132)](_0x1b83b7))return _0x1b83b7;return null;}catch(_0x2c7017){return null;}}function getCustomIdFromURL(){const _0x20fc27=_0x5ebe77,_0x1c74de=new URLSearchParams(window[_0x20fc27(0x16e)][_0x20fc27(0x192)]);return _0x1c74de[_0x20fc27(0x159)]('id')||'';}function getColorFromURL(){const _0x134832=_0x5ebe77,_0x165945=new URLSearchParams(window['location'][_0x134832(0x192)]);return _0x165945[_0x134832(0x159)](_0x134832(0x19f))||'#ff7487';}function getImageURLFromURL(){const _0x147df4=_0x5ebe77,_0x169ba0=new URLSearchParams(window['location'][_0x147df4(0x192)]);return _0x169ba0[_0x147df4(0x159)](_0x147df4(0x13a))||'';}function _0x4ae8(){const _0x3f0762=['clientY','get','8JLSnnX','click','image-particle','&img=','paused','offsetWidth','yêu','#ff7487','floor','.icon','bottom','open','getElementById','birthday','icon','opacity','?msg=','5px','885861iYxlyF','replaceState','location','has','linkContainer','div','50%','36668mFyfuB','rotatingContainer','mouseup','80xXdrTG','fontSize','translate(-50%,\x20-50%)\x20rotateX(','Ấn\x20vào\x20màn\x20hình\x20bật\x20nhạc','left','parentNode','split','length','block','random','364623OOyAtR','msg','selectedIconsDisplay','toCanvas','audio','pathname','target','style','textContent','forEach','position','px)','fullLink','padding','head','love','175MPaacb','&icons=','search','deg)\x20rotateY(','join','origin','size','customId','src','value','pointer','then','width','body','test','color','writeText','9999','58BmqYXE','inputText','clientX','absolute','galaxy','querySelectorAll','slice','star','none','delete','title','text-particle\x20heart','deg)\x20scale(1)','catch','startBtn','now','5px\x2010px','1604856UqxLRY','transform','min','date','1450630OkJBHN','chúc\x20mừng','iconSelector','...','borderRadius','49782VwUYlP','translateY(','load','className','isArray','appendChild','max','createElement','userSelect','touches','icons','music','img','rgba(255,\x20255,\x20255,\x200.267)','dataset','2504pwywit','from','trim','Vui\x20lòng\x20nhập\x20lời\x20nhắn!','Lỗi\x20tạo\x20QR\x20code','removeChild','tình','loop','touchmove','innerWidth','special','preventDefault','backgroundAudio','includes','filter','classList','10px','innerHeight','Sao\x20chép\x20thất\x20bại!','Đã\x20sao\x20chép\x20link!','add','\x20@font-face\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-family:\x20\x27woff\x27;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20src:\x20url(\x27./DF.ttf\x27)\x20format(\x27truetype\x27);\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20html,\x0a\x20\x20\x20\x20\x20\x20\x20\x20body\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20overflow:\x20hidden;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20radial-gradient(ellipse\x20at\x20center,\x20#000011\x200%,\x20#000000\x20100%);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-family:\x20\x27Segoe\x20UI\x27,\x20Tahoma,\x20Geneva,\x20Verdana,\x20sans-serif;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20user-select:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#inputSection\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x2050%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20left:\x2050%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translate(-50%,\x20-50%);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max-width:\x20600px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x2090vw;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max-height:\x20100vh;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-sizing:\x20border-box;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20overflow-y:\x20scroll;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20scrollbar-width:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20-ms-overflow-style:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20-webkit-overflow-scrolling:\x20touch;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#inputSection::-webkit-scrollbar\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20textarea\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max-width:\x20600px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2016px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20resize:\x20vertical;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x2010px\x20auto\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20input[type=text]\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max-width:\x20600px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2016px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-top:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#textColor\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max-width:\x20600px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x2040px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-top:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#music-selector\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max-width:\x20600px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x2040px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-top:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20button\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20relative;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20linear-gradient(145deg,\x20#063d80,\x20#4a90e2);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2012px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-shadow:\x200\x206px\x200\x20#3a70b1,\x200\x2010px\x2015px\x20rgba(0,\x200,\x200,\x200.3);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#fff;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-weight:\x20600;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2016px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2012px\x2030px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transition:\x20all\x200.2s\x20ease;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20user-select:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20outline:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20button:hover\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-shadow:\x200\x208px\x200\x20#2e65a8,\x200\x2014px\x2020px\x20rgba(0,\x200,\x200,\x200.4);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translateY(-4px);\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20button:active\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-shadow:\x200\x203px\x200\x20#3a70b1,\x200\x206px\x2010px\x20rgba(0,\x200,\x200,\x200.25);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translateY(2px);\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#linkContainer\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-top:\x2015px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#74c0ff9d;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20word-break:\x20break-all;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20user-select:\x20text;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#qrContainer\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-top:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20inline-block;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#galaxy\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x2050%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20left:\x2050%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform-style:\x20preserve-3d;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform-origin:\x20center\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translate(-50%,\x20-50%)\x20scale(1);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100vw;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x20100vh;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20overflow:\x20visible;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20pointer-events:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x201;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#rotatingContainer\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x2050%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20left:\x2050%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform-style:\x20preserve-3d;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform-origin:\x20center\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20translate(-50%,\x20-50%)\x20rotateX(0deg)\x20rotateY(0deg)\x20scale(1);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20pointer-events:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x202;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100vw;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x20100vh;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20overflow:\x20visible;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20.text-particle\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20absolute;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20white-space:\x20nowrap;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-family:\x20\x27woff\x27;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-shadow:\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x200\x200\x2012px\x20rgba(255,\x20255,\x20255,\x200.8);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20will-change:\x20transform,\x20opacity;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20user-select:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20.heart\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#ff7487ee;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20.star\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20absolute;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x2050%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20opacity:\x200.7;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-shadow:\x200\x200\x204px\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20pointer-events:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#iconSelector\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20justify-content:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20gap:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20.icon\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-top:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transition:\x20transform\x200.2s\x20ease,\x20color\x200.3s\x20ease;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20user-select:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x206px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20rgba(255,\x20255,\x20255,\x200.1);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-shadow:\x200\x200\x208px\x20rgba(255,\x20255,\x20255,\x200.2);\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20.icon:hover\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20scale(1.4);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#ff7487;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20rgba(255,\x20255,\x20255,\x200.25);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20box-shadow:\x200\x200\x2012px\x20#ff7487aa;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#selectedIconsDisplay\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#a0c4ff;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20min-height:\x2024px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20user-select:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2018px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#music-selector\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20relative;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x2010;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20flex-direction:\x20column;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20align-items:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20gap:\x2012px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x2020px\x200\x2030px\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max-width:\x20600px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20.image-particle\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20absolute;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20pointer-events:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20will-change:\x20transform,\x20opacity;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20user-select:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max-width:\x2050px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20max-height:\x2050px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20filter:\x20drop-shadow(0\x200\x204px\x20#fff);\x0a\x20\x20\x20\x20\x20\x20\x20\x20}','&music=','addEventListener','display','innerHTML','touchstart'];_0x4ae8=function(){return _0x3f0762;};return _0x4ae8();}const maxParticles=0x64,particleInterval=0xfa,activeParticles=new Set();function getRandomMessage(){const _0x31ef2d=_0x5ebe77;return messages[Math[_0x31ef2d(0x162)](Math[_0x31ef2d(0x17f)]()*messages[_0x31ef2d(0x17d)])];}function getRandomIcon(){const _0x4bf733=_0x5ebe77;if(selectedIcons[_0x4bf733(0x196)]>0x0){const _0x56c1a3=Array[_0x4bf733(0x13e)](selectedIcons);return _0x56c1a3[Math[_0x4bf733(0x162)](Math[_0x4bf733(0x17f)]()*_0x56c1a3[_0x4bf733(0x17d)])];}return;}function getMessageClass(_0x1e5192){const _0xb1ab07=_0x5ebe77,_0x143acb=_0x1e5192['toLowerCase']();if(_0x143acb[_0xb1ab07(0x14a)]('love')||_0x143acb['includes'](_0xb1ab07(0x160))||_0x143acb[_0xb1ab07(0x14a)](_0xb1ab07(0x143)))return _0xb1ab07(0x18f);else{if(_0x143acb[_0xb1ab07(0x14a)]('birthday')||_0x143acb['includes']('sinh\x20nhật')||_0x143acb['includes'](_0xb1ab07(0x12a)))return _0xb1ab07(0x167);else return/\d/[_0xb1ab07(0x19e)](_0x1e5192)||_0x1e5192[_0xb1ab07(0x14a)]('/')?_0xb1ab07(0x128):_0xb1ab07(0x147);}}function createTextParticle(){const _0x5cbe52=_0x5ebe77;if(activeParticles[_0x5cbe52(0x196)]>=maxParticles)return;const _0x1dc69a=Math[_0x5cbe52(0x17f)]()>0.7,_0x9bd170=document[_0x5cbe52(0x135)](_0x5cbe52(0x171));if(_0x1dc69a)_0x9bd170[_0x5cbe52(0x131)]=_0x5cbe52(0x11f),_0x9bd170[_0x5cbe52(0x188)]=getRandomIcon(),_0x9bd170[_0x5cbe52(0x187)]['fontSize']=0x10+Math[_0x5cbe52(0x17f)]()*0x6+'px';else{const _0x58e401=getRandomMessage();_0x9bd170[_0x5cbe52(0x131)]='text-particle\x20'+getMessageClass(_0x58e401),_0x9bd170[_0x5cbe52(0x188)]=_0x58e401,_0x9bd170[_0x5cbe52(0x187)][_0x5cbe52(0x177)]=0x18+Math[_0x5cbe52(0x17f)]()*0x8+'px',_0x9bd170[_0x5cbe52(0x187)][_0x5cbe52(0x19f)]=textColorFromURL;}_0x9bd170[_0x5cbe52(0x187)][_0x5cbe52(0x169)]=0x0,_0x9bd170[_0x5cbe52(0x187)]['position']=_0x5cbe52(0x1a5),rotatingContainer['appendChild'](_0x9bd170);const _0x595546=_0x9bd170[_0x5cbe52(0x15f)],_0x4e65ca=window[_0x5cbe52(0x146)],_0x29bbbd=Math[_0x5cbe52(0x17f)]()*(_0x4e65ca-_0x595546);_0x9bd170['style'][_0x5cbe52(0x17a)]=_0x29bbbd+'px';const _0x270224=-0x1e,_0xeae08=window[_0x5cbe52(0x14e)]+0x1e,_0x2b5494=0x1f40+Math[_0x5cbe52(0x17f)]()*0xfa0,_0x2ac648=performance[_0x5cbe52(0x123)]();function _0x269214(_0x1fb1c4){const _0x2a918e=_0x5cbe52,_0x365e3e=_0x1fb1c4-_0x2ac648;if(_0x365e3e<_0x2b5494){const _0x506354=_0x365e3e/_0x2b5494,_0x30bf4e=_0x270224+_0x506354*(_0xeae08-_0x270224);_0x9bd170['style'][_0x2a918e(0x126)]=_0x2a918e(0x12f)+_0x30bf4e+_0x2a918e(0x18b);if(_0x506354<0.1)_0x9bd170['style']['opacity']=_0x506354*0xa;else _0x506354>0.9?_0x9bd170['style'][_0x2a918e(0x169)]=(0x1-_0x506354)*0xa:_0x9bd170['style'][_0x2a918e(0x169)]=0x1;requestAnimationFrame(_0x269214);}else _0x9bd170[_0x2a918e(0x17b)]&&(_0x9bd170[_0x2a918e(0x17b)][_0x2a918e(0x142)](_0x9bd170),activeParticles[_0x2a918e(0x11d)](_0x9bd170));}activeParticles[_0x5cbe52(0x151)](_0x9bd170),requestAnimationFrame(_0x269214);}function createImageParticle(_0x191538){const _0x565e8d=_0x5ebe77;if(activeParticles[_0x565e8d(0x196)]>=maxParticles)return;const _0x566095=document[_0x565e8d(0x135)](_0x565e8d(0x13a));_0x566095['className']=_0x565e8d(0x15c),_0x566095[_0x565e8d(0x198)]=_0x191538,_0x566095[_0x565e8d(0x187)][_0x565e8d(0x169)]=0x0,rotatingContainer[_0x565e8d(0x133)](_0x566095);const _0x66cd6f=_0x566095[_0x565e8d(0x15f)]||0x28,_0x281f03=window['innerWidth'],_0xfd7524=Math[_0x565e8d(0x17f)]()*(_0x281f03-_0x66cd6f);_0x566095[_0x565e8d(0x187)][_0x565e8d(0x17a)]=_0xfd7524+'px';const _0xffb718=-0x32,_0x4bc3fe=window[_0x565e8d(0x14e)]+0x32,_0x333f40=0x1f40+Math[_0x565e8d(0x17f)]()*0xfa0,_0x4b76aa=performance[_0x565e8d(0x123)]();function _0x362d52(_0x4aec69){const _0x57b08a=_0x565e8d,_0x598d75=_0x4aec69-_0x4b76aa;if(_0x598d75<_0x333f40){const _0x462c72=_0x598d75/_0x333f40,_0x3c03e5=_0xffb718+_0x462c72*(_0x4bc3fe-_0xffb718);_0x566095[_0x57b08a(0x187)][_0x57b08a(0x126)]='translateY('+_0x3c03e5+_0x57b08a(0x18b);if(_0x462c72<0.1)_0x566095[_0x57b08a(0x187)][_0x57b08a(0x169)]=_0x462c72*0xa;else _0x462c72>0.9?_0x566095[_0x57b08a(0x187)][_0x57b08a(0x169)]=(0x1-_0x462c72)*0xa:_0x566095[_0x57b08a(0x187)]['opacity']=0x1;requestAnimationFrame(_0x362d52);}else _0x566095[_0x57b08a(0x17b)]&&(_0x566095[_0x57b08a(0x17b)][_0x57b08a(0x142)](_0x566095),activeParticles[_0x57b08a(0x11d)](_0x566095));}activeParticles[_0x565e8d(0x151)](_0x566095),requestAnimationFrame(_0x362d52);}let lastParticleTime=0x0,imageURLFromURL='';function animationLoop(_0x5ccc4e){const _0x4c4089=_0x5ebe77;if(!lastParticleTime)lastParticleTime=_0x5ccc4e;_0x5ccc4e-lastParticleTime>particleInterval&&activeParticles[_0x4c4089(0x196)]<maxParticles&&(imageURLFromURL&&Math[_0x4c4089(0x17f)]()<0.2?createImageParticle(imageURLFromURL):createTextParticle(),lastParticleTime=_0x5ccc4e),requestAnimationFrame(animationLoop);}function createStars(_0x5a7ed6=0x64){const _0x565089=_0x5ebe77;for(let _0x34285f=0x0;_0x34285f<_0x5a7ed6;_0x34285f++){const _0x5b71da=document[_0x565089(0x135)](_0x565089(0x171));_0x5b71da['className']=_0x565089(0x11b);const _0xd38e43=Math[_0x565089(0x17f)]()*0x2+0.5;_0x5b71da['style'][_0x565089(0x19c)]=_0xd38e43+'px',_0x5b71da[_0x565089(0x187)]['height']=_0xd38e43+'px',_0x5b71da[_0x565089(0x187)]['top']=Math[_0x565089(0x17f)]()*0x64+'%',_0x5b71da[_0x565089(0x187)][_0x565089(0x17a)]=Math['random']()*0x64+'%',_0x5b71da['style'][_0x565089(0x169)]=Math[_0x565089(0x17f)](),galaxy[_0x565089(0x133)](_0x5b71da);}}function initGalaxy(){const _0x577b42=_0x5ebe77;galaxy[_0x577b42(0x187)][_0x577b42(0x155)]='block',createStars(),animationLoop();}let isDragging=![],lastX=0x0,lastY=0x0,rotationX=0x0,rotationY=0x0;function updateGalaxyTransform(){const _0x483857=_0x5ebe77;galaxy['style'][_0x483857(0x126)]=_0x483857(0x178)+rotationX+_0x483857(0x193)+rotationY+'deg)\x20scale(1)';}document[_0x5ebe77(0x154)]('mousedown',_0x210eeb=>{const _0x432067=_0x5ebe77;isDragging=!![],lastX=_0x210eeb[_0x432067(0x1a4)];}),document[_0x5ebe77(0x154)](_0x5ebe77(0x175),()=>{isDragging=![];}),document[_0x5ebe77(0x154)]('mouseleave',()=>{isDragging=![];}),document['addEventListener']('mousemove',_0x544d0b=>{const _0x355136=_0x5ebe77;if(!isDragging)return;const _0x4b67f6=_0x544d0b[_0x355136(0x1a4)]-lastX;rotationY+=_0x4b67f6*0.2,rotationX=Math[_0x355136(0x127)](0x2d,Math['max'](-0x2d,rotationX)),rotatingContainer[_0x355136(0x187)][_0x355136(0x126)]=_0x355136(0x178)+rotationX+_0x355136(0x193)+rotationY+_0x355136(0x120),lastX=_0x544d0b[_0x355136(0x1a4)],lastY=_0x544d0b['clientY'];}),document[_0x5ebe77(0x154)](_0x5ebe77(0x157),_0x560be7=>{const _0x48b502=_0x5ebe77;_0x560be7[_0x48b502(0x137)][_0x48b502(0x17d)]===0x1&&(isDragging=!![],lastX=_0x560be7['touches'][0x0]['clientX'],lastY=_0x560be7['touches'][0x0][_0x48b502(0x158)]);}),document[_0x5ebe77(0x154)](_0x5ebe77(0x145),_0x2c13ff=>{const _0x4dacb0=_0x5ebe77;if(!isDragging||_0x2c13ff[_0x4dacb0(0x137)]['length']!==0x1)return;_0x2c13ff[_0x4dacb0(0x148)]();const _0x3bfe08=_0x2c13ff[_0x4dacb0(0x137)][0x0][_0x4dacb0(0x1a4)]-lastX,_0x3bb6a8=_0x2c13ff[_0x4dacb0(0x137)][0x0][_0x4dacb0(0x158)]-lastY;rotationY+=_0x3bfe08*0.2,rotationX=Math[_0x4dacb0(0x127)](0x2d,Math[_0x4dacb0(0x134)](-0x2d,rotationX)),rotatingContainer['style'][_0x4dacb0(0x126)]='translate(-50%,\x20-50%)\x20rotateX('+rotationX+_0x4dacb0(0x193)+rotationY+_0x4dacb0(0x120),lastY=_0x2c13ff[_0x4dacb0(0x137)][0x0][_0x4dacb0(0x158)];},{'passive':![]}),document[_0x5ebe77(0x154)]('touchend',()=>{isDragging=![];}),startBtn[_0x5ebe77(0x154)](_0x5ebe77(0x15b),()=>{const _0x16cb26=_0x5ebe77,_0x86c0fd=textarea[_0x16cb26(0x199)][_0x16cb26(0x13f)]();if(!_0x86c0fd){alert(_0x16cb26(0x140));return;}messages=_0x86c0fd[_0x16cb26(0x17c)]('\x0a')[_0x16cb26(0x14b)](_0x215c01=>_0x215c01[_0x16cb26(0x13f)]()!=='');if(messages[_0x16cb26(0x17d)]===0x0){alert('Lời\x20nhắn\x20không\x20được\x20để\x20trống!');return;}const _0x3ca03b=encodeURIComponent(messages[_0x16cb26(0x194)]('|'));let _0x52faa2=colorInput['value']||'#ff7487';textColorFromURL=_0x52faa2;let _0x3b78d0=customIdInput[_0x16cb26(0x199)][_0x16cb26(0x13f)]();const _0x4a9ace=musicSelect[_0x16cb26(0x199)];let _0x1b5f28=document[_0x16cb26(0x166)]('imageURL')[_0x16cb26(0x199)][_0x16cb26(0x13f)](),_0x25555a=''+window[_0x16cb26(0x16e)][_0x16cb26(0x195)]+window['location'][_0x16cb26(0x185)]+_0x16cb26(0x16a)+_0x3ca03b+'&color='+encodeURIComponent(_0x52faa2);_0x3b78d0['length']>0x0&&(_0x25555a+='&id='+encodeURIComponent(_0x3b78d0)),_0x4a9ace[_0x16cb26(0x17d)]>0x0&&(_0x25555a+=_0x16cb26(0x153)+encodeURIComponent(_0x4a9ace)),_0x1b5f28[_0x16cb26(0x17d)]>0x0&&(_0x25555a+=_0x16cb26(0x15d)+encodeURIComponent(_0x1b5f28)),selectedIcons['size']>0x0&&(_0x25555a+=_0x16cb26(0x191)+encodeURIComponent([...selectedIcons][_0x16cb26(0x194)](','))),linkContainer['style'][_0x16cb26(0x155)]=_0x16cb26(0x17e),linkContainer[_0x16cb26(0x188)]=truncateText(_0x25555a,0x1e),linkContainer[_0x16cb26(0x11e)]=_0x25555a,linkContainer['dataset'][_0x16cb26(0x18c)]=_0x25555a,qrContainer[_0x16cb26(0x187)][_0x16cb26(0x155)]=_0x16cb26(0x11c);}),linkContainer[_0x5ebe77(0x154)]('click',()=>{const _0x15f1e6=_0x5ebe77,_0x3e473c=linkContainer[_0x15f1e6(0x13c)][_0x15f1e6(0x18c)];if(!_0x3e473c)return;navigator['clipboard'][_0x15f1e6(0x1a0)](_0x3e473c)[_0x15f1e6(0x19b)](()=>{const _0x4f9e4b=_0x15f1e6;alert(_0x4f9e4b(0x150)),window[_0x4f9e4b(0x165)](_0x3e473c,'_blank');})[_0x15f1e6(0x121)](()=>{const _0x37644c=_0x15f1e6;alert(_0x37644c(0x14f));});}),qrBtn[_0x5ebe77(0x154)](_0x5ebe77(0x15b),()=>{const _0x45b96d=_0x5ebe77,_0x64676f=linkContainer[_0x45b96d(0x13c)]['fullLink'];if(!_0x64676f){alert('Vui\x20lòng\x20tạo\x20link\x20trước!');return;}qrContainer[_0x45b96d(0x187)][_0x45b96d(0x155)]=_0x45b96d(0x17e),qrContainer[_0x45b96d(0x156)]='',QRCode[_0x45b96d(0x183)](_0x64676f,{'width':0xf0},function(_0x4c3078,_0x3ccaba){const _0x25991d=_0x45b96d;if(_0x4c3078){alert(_0x25991d(0x141));return;}qrContainer[_0x25991d(0x133)](_0x3ccaba);});}),window[_0x5ebe77(0x154)](_0x5ebe77(0x130),()=>{const _0x5bb360=_0x5ebe77,_0x4b12a0=getMessagesFromURL();if(_0x4b12a0&&_0x4b12a0[_0x5bb360(0x17d)]>0x0){messages=_0x4b12a0,textColorFromURL=getColorFromURL();const _0x4183fc=new URLSearchParams(window['location'][_0x5bb360(0x192)]),_0x5d32e1=_0x4183fc['get'](_0x5bb360(0x139)),_0xabf994=_0x4183fc[_0x5bb360(0x159)](_0x5bb360(0x13a));imageURLFromURL=_0xabf994||'';const _0x98d56f=_0x4183fc['get'](_0x5bb360(0x138));inputSection[_0x5bb360(0x187)][_0x5bb360(0x155)]=_0x5bb360(0x11c),initGalaxy();_0x98d56f&&(selectedIcons=new Set(_0x98d56f[_0x5bb360(0x17c)](',')),iconSelector[_0x5bb360(0x1a7)](_0x5bb360(0x163))[_0x5bb360(0x189)](_0x4490bd=>{const _0x205d2c=_0x5bb360;_0x4490bd[_0x205d2c(0x187)][_0x205d2c(0x169)]=selectedIcons[_0x205d2c(0x16f)](_0x4490bd[_0x205d2c(0x13c)][_0x205d2c(0x168)])?0x1:0.5;}),updateSelectedIconsDisplay());if(_0x5d32e1){const _0x53e37b=document[_0x5bb360(0x135)](_0x5bb360(0x184));_0x53e37b['id']=_0x5bb360(0x149),_0x53e37b[_0x5bb360(0x198)]=_0x5d32e1,_0x53e37b[_0x5bb360(0x144)]=!![],_0x53e37b['autoplay']=![],_0x53e37b['style']['display']=_0x5bb360(0x11c),document[_0x5bb360(0x19d)][_0x5bb360(0x133)](_0x53e37b);let _0x435174=document['createElement'](_0x5bb360(0x171));_0x435174['id']='musicHint',_0x435174[_0x5bb360(0x187)][_0x5bb360(0x18a)]='fixed',_0x435174['style'][_0x5bb360(0x164)]=_0x5bb360(0x14d),_0x435174['style'][_0x5bb360(0x17a)]=_0x5bb360(0x172),_0x435174[_0x5bb360(0x187)]['transform']='translateX(-50%)',_0x435174[_0x5bb360(0x187)][_0x5bb360(0x19f)]=_0x5bb360(0x13b),_0x435174[_0x5bb360(0x187)]['background']='',_0x435174[_0x5bb360(0x187)][_0x5bb360(0x18d)]=_0x5bb360(0x124),_0x435174[_0x5bb360(0x187)][_0x5bb360(0x12d)]=_0x5bb360(0x16b),_0x435174[_0x5bb360(0x187)]['zIndex']=_0x5bb360(0x1a1),_0x435174['style'][_0x5bb360(0x136)]=_0x5bb360(0x11c),_0x435174['style']['cursor']=_0x5bb360(0x19a),_0x435174[_0x5bb360(0x188)]=_0x5bb360(0x179),document[_0x5bb360(0x19d)][_0x5bb360(0x133)](_0x435174);function _0x57d5fd(){const _0x210e6c=_0x5bb360;_0x53e37b[_0x210e6c(0x15e)]&&(_0x53e37b['play'](),_0x435174['textContent']='\x20');}document[_0x5bb360(0x19d)][_0x5bb360(0x154)](_0x5bb360(0x15b),_0x57d5fd),_0x435174['addEventListener'](_0x5bb360(0x15b),_0x57d5fd);}}else galaxy['style']['display']='none',inputSection['style'][_0x5bb360(0x155)]='block';history[_0x5bb360(0x16d)](null,'',window[_0x5bb360(0x16e)][_0x5bb360(0x185)]);});
+    </script>
+
+
+
+</body><savior-host style="all: unset; position: absolute; top: 0; left: 0; z-index: 99999999999999; display: block !important; overflow: unset"></savior-host><en2vi-host class="corom-element" version="3" style="all: initial; position: absolute; top: 0; left: 0; right: 0; height: 0; margin: 0; text-align: left; z-index: 10000000000; pointer-events: none; border: none; display: block"></en2vi-host><savior-host style="all: unset; position: absolute; top: 0; left: 0; z-index: 99999999999999; display: block !important; overflow: unset"></savior-host></html>
