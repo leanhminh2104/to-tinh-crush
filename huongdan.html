@@ -329,3 +329,550 @@
   
   
   </body><savior-host style="all: unset; position: absolute; top: 0; left: 0; z-index: 99999999999999; display: block !important; overflow: unset"></savior-host><en2vi-host class="corom-element" version="3" style="all: initial; position: absolute; top: 0; left: 0; right: 0; height: 0; margin: 0; text-align: left; z-index: 10000000000; pointer-events: none; border: none; display: block"></en2vi-host><savior-host style="all: unset; position: absolute; top: 0; left: 0; z-index: 99999999999999; display: block !important; overflow: unset"></savior-host></html>
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Script Wedsite</title>
+    <style>
+        
+        /*menu music*/
+        .neon-box {
+            animation: neon-animation 3s infinite linear;
+        }
+
+        /* Định nghĩa animation */
+        @keyframes neon-animation {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.9);
+            }
+            25% {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.9);
+            }
+            50% {
+                box-shadow: 0 0 10px rgba(0, 255, 0, 0.5), 0 0 20px rgba(0, 255, 0, 0.7), 0 0 30px rgba(0, 255, 0, 0.9);
+            }
+            75% {
+                box-shadow: 0 0 10px rgba(255, 255, 0, 0.5), 0 0 20px rgba(255, 255, 0, 0.7), 0 0 30px rgba(255, 255, 0, 0.9);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.7), 0 0 30px rgba(255, 0, 255, 0.9);
+            }
+        }
+        .menu-menu-music {
+            position: fixed;
+            top: 50px;
+            right: -300px;
+            width: 170px;
+            background: #00000085;
+            color: rgb(3, 235, 252);
+            padding: 10px;
+            border-radius: 20px;
+            z-index: 999999999;
+            transition: right 1s ease-in-out;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .menu-menu-music.show {
+            right: 20px;
+        }
+        .menu-menu-music .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        .menu-menu-music button {
+            border-radius: 10px;
+            width: 47%;
+            padding: 5px;
+            background: #09ef28;
+            color: rgba(253, 0, 0, 0.883);
+            border: none;
+            cursor: pointer;
+            font-size: 10px;
+        }
+        .menu-menu-music button:hover {
+            background: #04ddf1;
+        }
+        .menu-menu-music p {
+            font-size: 11px;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .menu-icon-menu-music {
+            position: fixed;
+            top: 130px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            z-index: 1000000000;
+            user-select: none;
+        }
+        .menu-icon-menu-music:active {
+            cursor: grabbing;
+        }
+        .menu-icon-menu-music img {
+            width: 40px;
+            height: 40px;
+        }
+        /*hết menu music*/
+
+        #LAMDev-top-menu {
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        z-index: 100000;
+        }
+
+
+        #LAMDev-top-menu li {
+            display: block;
+        }
+
+        .LAMDev-menu-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: #e8dede6c;
+            color: #005eff;
+            text-decoration: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.432);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .LAMDev-menu-item img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .LAMDev-menu-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .LAMDev-menu-item i {
+            font-size: 14px;
+        }
+
+        .LAMDev-hidden {
+            display: none !important;
+        }
+
+        /* Marquee cố định trên đầu trang */
+        marquee {
+            background-color: rgba(144, 238, 144, 0.764);
+            color: #ff0000;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 201;
+        }
+
+        .link-custom {
+        color: #0000FF;
+        font-weight: bold;
+        text-decoration: none;
+        }
+
+
+        /* CSS cho lời chúc */
+        .message-amintb {
+            position: absolute;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.6s ease-in-out;
+            opacity: 1;
+            animation: fadeUp-amintb 2s forwards;
+            display: flex;
+            align-items: center;
+            pointer-events: none; /* Không ảnh hưởng đến các tương tác khác */
+        }
+
+        /* CSS cho trái tim */
+        .heart-amintb {
+            margin-right: 5px;
+            font-size: 10px;
+        }
+
+        /* Hiệu ứng mờ dần và trôi lên trên */
+        @keyframes fadeUp-amintb {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-150px);
+            }
+        }
+
+        @-webkit-keyframes snowflakes-fall {
+        0% {top:-10%}
+        100% {top:100%}
+        }
+        @-webkit-keyframes snowflakes-shake {
+            0%,100% {-webkit-transform:translateX(0);transform:translateX(0)}
+            50% {-webkit-transform:translateX(80px);transform:translateX(80px)}
+        }
+        @keyframes snowflakes-fall {
+            0% {top:-10%}
+            100% {top:100%}
+        }
+        @keyframes snowflakes-shake {
+            0%,100%{ transform:translateX(0)}
+            50% {transform:translateX(80px)}
+        }
+        .snowflake {
+            color: #fff;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            text-shadow: 0 0 5px #000;
+            position:fixed;
+            top:-10%;
+            z-index:9999;
+            -webkit-user-select:none;
+            -moz-user-select:none;
+            -ms-user-select:none;
+            user-select:none;
+            cursor:default;
+            -webkit-animation-name:snowflakes-fall,snowflakes-shake;
+            -webkit-animation-duration:10s,3s;
+            -webkit-animation-timing-function:linear,ease-in-out;
+            -webkit-animation-iteration-count:infinite,infinite;
+            -webkit-animation-play-state:running,running;
+            animation-name:snowflakes-fall,snowflakes-shake;
+            animation-duration:10s,3s;
+            animation-timing-function:linear,ease-in-out;
+            animation-iteration-count:infinite,infinite;
+            animation-play-state:running,running;
+        }
+        .snowflake:nth-of-type(0){
+            left:1%;-webkit-animation-delay:0s,0s;animation-delay:0s,0s
+        }
+        .snowflake:nth-of-type(1){
+            left:10%;-webkit-animation-delay:1s,1s;animation-delay:1s,1s
+        }
+        .snowflake:nth-of-type(2){
+            left:20%;-webkit-animation-delay:6s,.5s;animation-delay:6s,.5s
+        }
+        .snowflake:nth-of-type(3){
+            left:30%;-webkit-animation-delay:4s,2s;animation-delay:4s,2s
+        }
+        .snowflake:nth-of-type(4){
+            left:40%;-webkit-animation-delay:2s,2s;animation-delay:2s,2s
+        }
+        .snowflake:nth-of-type(5){
+            left:50%;-webkit-animation-delay:8s,3s;animation-delay:8s,3s
+        }
+        .snowflake:nth-of-type(6){
+            left:60%;-webkit-animation-delay:6s,2s;animation-delay:6s,2s
+        }
+        .snowflake:nth-of-type(7){
+            left:70%;-webkit-animation-delay:2.5s,1s;animation-delay:2.5s,1s
+        }
+        .snowflake:nth-of-type(8){
+            left:80%;-webkit-animation-delay:1s,0s;animation-delay:1s,0s
+        }
+        .snowflake:nth-of-type(9){
+            left:90%;-webkit-animation-delay:3s,1.5s;animation-delay:3s,1.5s
+        }
+        .snowflake:nth-of-type(10){
+            left:25%;-webkit-animation-delay:2s,0s;animation-delay:2s,0s
+        }
+        .snowflake:nth-of-type(11){
+            left:65%;-webkit-animation-delay:4s,2.5s;animation-delay:4s,2.5s
+        }
+    </style>
+</head>
+<body>
+    <!--menu music-->
+    <div class="menu-icon-menu-music" id="menuIconMenuMusic">
+        <img src="https://files.catbox.moe/k32p3o.gif" alt="☰">
+    </div>
+    <div class="menu-menu-music neon-box" id="musicMenuMenuMusic">
+        <div class="button-container">
+            <button onclick="togglePlayMenuMusic()"><b>On / Off</b></button>
+            <button onclick="nextSongMenuMusic()"><b>Chuyển bài</b></button>
+        </div>
+        <p id="songNameMenuMusic"><b>Nhấp On/Off để phát</b></p>
+    </div>
+    <audio id="audioPlayerMenuMusic" preload="auto"></audio>
+       <!--icon rơi-->
+       <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">☘️</div>
+        <div class="snowflake">🎁</div>
+        <div class="snowflake">🔅</div>
+        <div class="snowflake">🍀</div>
+        <div class="snowflake">🌼</div>
+        <div class="snowflake">🌸</div>
+        <div class="snowflake">🌺</div>
+        <div class="snowflake">🌟</div>
+        <div class="snowflake">🔥</div>
+        <div class="snowflake">🍂</div>
+        <div class="snowflake">🍁</div>
+        <div class="snowflake">💖</div>
+      </div>
+
+    <!-- Marquee cố định trên đầu trang -->
+    <marquee>
+      Wedsite đang được phát triển nên chưa đầy đủ tính năng 
+                    
+      Mọi vấn đề xin liên hệ qua <a href="#" onclick="openLink('https://zalo.me/g/boiqoq426')" class="link-custom">group hỗ trợ </a>
+      <font size="1">(click vào icon liên hệ hỗ trợ phía dưới để vào group)</font>
+                    
+      Xem lại hướng dẫn  
+      <a href="#" onclick="openLink('./huongdan.html')" class="link-custom">Tại đây </a>
+                    
+      Liên Hệ Admin 
+      <a href="#" onclick="openLink('https://leanhminh.io.vn')" class="link-custom">Tại đây</a>
+  </marquee>
+
+    <ul id="LAMDev-top-menu">
+        <!-- Nút đóng menu -->
+        <li>
+            <a class="LAMDev-menu-item" id="toggle-menu-button" href="#">
+                <i class="fa-solid fa-eye-slash"></i>
+            </a>
+        </li>
+        <!-- Hỗ trợ Zalo -->
+        <li>
+            <a class="LAMDev-menu-item" href="#" onclick="openLink('https://zalo.me/g/boiqoq426')">
+                <img alt="Zalo" src="https://vncloud.net/assets/images/thumb-zalo.png">
+            </a>
+        </li>
+        <!-- Hỗ trợ Telegram -->
+        <li>
+            <a class="LAMDev-menu-item" href="#" onclick="openLink('https://t.me/aminteam_chat')">
+                <img alt="Telegram" src="https://cdn.mypanel.link/sw177w/7ea6iam2aygm0qws.gif">
+            </a>
+        </li>
+        <!-- Hỗ trợ FaceBook -->
+        <li>
+            <a class="LAMDev-menu-item" href="#" onclick="openLink('https://www.facebook.com/share/g/19ya9W2SeC/')">
+                <img alt="FaceBook" src="https://cdn.mypanel.link/4cgr8h/9rjnzbd98rt8s5we.gif">
+            </a>
+        </li>
+        <!-- Thông Tin AdminAdmin -->
+        <li>
+            <a class="LAMDev-menu-item" href="#" onclick="openLink('https://support.leanhminh.io.vn')">
+                <img alt="ProFile" src="https://files.catbox.moe/t5tyui.gif">
+            </a>
+        </li>
+    </ul>
+
+    <script>
+        // Hàm mở link trong tab mới
+        function openLink(url) {
+            window.open(url, '_blank');
+        }
+
+        // menu music
+        let audioMenuMusic = document.getElementById("audioPlayerMenuMusic");
+        let menuMenuMusic = document.getElementById("musicMenuMenuMusic");
+        let menuIconMenuMusic = document.getElementById("menuIconMenuMusic");
+        let songNameMenuMusic = document.getElementById("songNameMenuMusic");
+        let hideTimeoutMenuMusic;
+        let songsMenuMusic = [
+            "https://files.catbox.moe/rxgkgw.mp3",
+            "https://files.catbox.moe/fk6laq.mp3",
+            "https://files.catbox.moe/t7k12b.mp3",
+            "https://files.catbox.moe/y73mts.mp3",
+            "https://files.catbox.moe/fr6yee.mp3",
+            "https://files.catbox.moe/m0tr3t.mp3",
+            "https://files.catbox.moe/8tea2f.mp3",
+            "https://files.catbox.moe/06xnm5.mp3",
+            "https://files.catbox.moe/xmmi71.mp3",
+            "https://files.catbox.moe/7uz7e0.mp3"
+        ];
+    
+        // Thêm sự kiện khi nhạc kết thúc
+        audioMenuMusic.addEventListener("ended", nextSongMenuMusic);
+    
+        function togglePlayMenuMusic() {
+            if (!audioMenuMusic.src || audioMenuMusic.src === window.location.href) {
+                nextSongMenuMusic();
+            } else if (audioMenuMusic.paused) {
+                audioMenuMusic.play().catch(error => console.error("Lỗi phát nhạc:", error));
+                songNameMenuMusic.innerText = "Đang phát nhạc";
+            } else {
+                audioMenuMusic.pause();
+                songNameMenuMusic.innerText = "Nhấn On/Off để phát";
+            }
+        }
+    
+        function nextSongMenuMusic() {
+            let randomIndex = Math.floor(Math.random() * songsMenuMusic.length);
+            let newSong = songsMenuMusic[randomIndex];
+            audioMenuMusic.src = newSong;
+            audioMenuMusic.play().catch(error => console.error("Lỗi phát nhạc:", error));
+            songNameMenuMusic.innerText = "Đang phát nhạc";
+        }
+    
+        function hideMenuMenuMusic() {
+            menuMenuMusic.classList.remove("show");
+        }
+    
+        function showMenuMenuMusic() {
+            menuMenuMusic.classList.add("show");
+            resetHideTimerMenuMusic();
+        }
+    
+        function resetHideTimerMenuMusic() {
+            clearTimeout(hideTimeoutMenuMusic);
+            hideTimeoutMenuMusic = setTimeout(hideMenuMenuMusic, 5000);
+        }
+    
+        let isDraggingMenuMusic = false;
+        let offsetXMenuMusic, offsetYMenuMusic;
+    
+        menuIconMenuMusic.addEventListener("mousedown", (e) => {
+            isDraggingMenuMusic = true;
+            offsetXMenuMusic = e.clientX - menuIconMenuMusic.getBoundingClientRect().left;
+            offsetYMenuMusic = e.clientY - menuIconMenuMusic.getBoundingClientRect().top;
+            menuIconMenuMusic.style.cursor = "grabbing";
+        });
+    
+        document.addEventListener("mousemove", (e) => {
+            if (isDraggingMenuMusic) {
+                let newX = e.clientX - offsetXMenuMusic;
+                let newY = e.clientY - offsetYMenuMusic;
+    
+                let maxX = window.innerWidth - menuIconMenuMusic.offsetWidth;
+                let maxY = window.innerHeight - menuIconMenuMusic.offsetHeight;
+    
+                newX = Math.max(0, Math.min(newX, maxX));
+                newY = Math.max(0, Math.min(newY, maxY));
+    
+                menuIconMenuMusic.style.left = `${newX}px`;
+                menuIconMenuMusic.style.top = `${newY}px`;
+            }
+        });
+    
+        document.addEventListener("mouseup", () => {
+            isDraggingMenuMusic = false;
+            menuIconMenuMusic.style.cursor = "grab";
+        });
+    
+        window.onload = () => {
+            setTimeout(() => {
+                menuMenuMusic.classList.add("show");
+                resetHideTimerMenuMusic();
+            }, 500);
+        };
+    
+        menuMenuMusic.addEventListener("mouseenter", resetHideTimerMenuMusic);
+        menuMenuMusic.addEventListener("mousemove", resetHideTimerMenuMusic);
+        menuMenuMusic.addEventListener("click", resetHideTimerMenuMusic);
+        menuIconMenuMusic.addEventListener("click", showMenuMenuMusic);
+
+        // Lấy các thành phần cho menu LAMDev-top-menu
+        const toggleButton = document.getElementById("toggle-menu-button");
+        // Giả sử menu cần ẩn/hiện là phần tử cha của toggleButton (không thay đổi cấu trúc gốc)
+        const menu = toggleButton.parentElement.parentElement;
+    
+        // Sự kiện click để ẩn/hiện menu
+        toggleButton.addEventListener("click", (e) => {
+            e.preventDefault(); // Ngăn chặn link chuyển hướng
+            menu.classList.toggle("LAMDev-hidden"); // Bật/tắt class 'LAMDev-hidden' để ẩn/hiện menu
+        });
+    
+        // Mảng các lời chúc ngẫu nhiên
+        const messagesAmintb = [
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            ''
+        ];
+    
+        // Mảng trái tim ngẫu nhiên
+        const heartsAmintb = [
+            '✽', '✿ ', '☾', '☁', '✹', '✩', '✪', '✦', 
+            '❖', '✧', ' ✯', '✴', '✵', '✺'
+        ];
+    
+        // Xử lý sự kiện click trên document cho lời chúc
+        document.addEventListener('click', function(event) {
+            // Tạo phần tử lời chúc
+            const messageAmintb = document.createElement('div');
+            messageAmintb.classList.add('message-amintb');
+    
+            // Tạo biểu tượng trái tim
+            const heartAmintb = document.createElement('span');
+            heartAmintb.classList.add('heart-amintb');
+    
+            // Chọn ngẫu nhiên 1 trái tim
+            const randomHeart = heartsAmintb[Math.floor(Math.random() * heartsAmintb.length)];
+            heartAmintb.textContent = randomHeart;
+    
+            // Tạo phần tử chứa lời chúc
+            const textAmintb = document.createElement('span');
+    
+            // Lấy vị trí click
+            const x = event.clientX;
+            const y = event.clientY;
+    
+            // Chọn ngẫu nhiên 1 lời chúc
+            const randomMessage = messagesAmintb[Math.floor(Math.random() * messagesAmintb.length)];
+            textAmintb.textContent = randomMessage;
+    
+            // Chọn ngẫu nhiên màu chữ
+            const randomColor = getRandomColorAmintb();
+            textAmintb.style.color = randomColor;
+            heartAmintb.style.color = randomColor;
+    
+            // Đặt vị trí cho lời chúc
+            messageAmintb.style.left = `${x}px`;
+            messageAmintb.style.top = `${y}px`;
+    
+            // Thêm trái tim và lời chúc vào phần tử chính
+            messageAmintb.appendChild(heartAmintb);
+            messageAmintb.appendChild(textAmintb);
+    
+            // Thêm lời chúc vào body
+            document.body.appendChild(messageAmintb);
+    
+            // Xóa lời chúc sau khi fade out
+            setTimeout(() => {
+                messageAmintb.remove();
+            }, 2000); // Sau 2s lời chúc sẽ bị xóa
+        });
+    
+        function getRandomColorAmintb() {
+            const colors = [
+                '#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#ffbf00', '#8e44ad', '#3498db', '#2ecc71', 
+                '#f39c12', '#e74c3c', '#9b59b6', '#1abc9c', '#34495e', '#16a085', '#f1c40f', '#e67e22'
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html>
